@@ -200,18 +200,35 @@ void quickSort(vector<Bid>& bids, int begin, int end) {
  */
 void selectionSort(vector<Bid>& bids) {
     //define min as int (index of the current minimum bid)
-
+    int min;
     // check size of bids vector
     // set size_t platform-neutral result equal to bid.size()
-
+    size_t size = bids.size();
     // pos is the position within bids that divides sorted/unsorted
-    // for size_t pos = 0 and less than size -1 
+    // for size_t pos = 0 and less than size -1
+    for (size_t pos = 0; pos < size - 1; pos++)
+    {
         // set min = pos
+        min = pos;
         // loop over remaining elements to the right of position
+        for (size_t j = pos + 1; j < size; j++)
+        {
             // if this element's title is less than minimum title
+            if (bids[j].title < bids[min].title)
+            {
                 // this element becomes the minimum
+                min = j;
+            }
+                
+        }
+
         // swap the current minimum with smaller one found
-            // swap is a built in vector method
+        // swap is a built in vector method
+        if (min != pos)
+        {
+            swap(bids[pos], bids[min]);
+        }
+    }
 }
 
 /**
@@ -286,9 +303,36 @@ int main(int argc, char* argv[]) {
 
             break;
 
-        // FIXME (1b): Invoke the selection sort and report timing results
+        case 3:
+        {
+            ticks = clock(); // start the timer
 
-        // FIXME (2b): Invoke the quick sort and report timing results
+            selectionSort(bids); // sort the bids
+
+            ticks = clock() - ticks; // current clock ticks minus the starting clock ticks
+
+            cout << "time: " << ticks << " clock ticks" << endl;
+            cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+
+            break;
+        }
+        case 4:
+        {
+            int begin = 0; // starting index
+            int end = bids.size() - 1; // last index
+
+            ticks = clock(); // starts the clock
+
+            quickSort(bids, begin, end); // calling quick sort
+
+            ticks = clock() - ticks; // end the timer
+
+            // displaying time
+            cout << "time: " << ticks << " clock ticks" << endl;
+            cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+
+            break;
+        }
 
         }
     }
