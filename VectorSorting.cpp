@@ -171,18 +171,21 @@ int partition(vector<Bid>& bids, int begin, int end) {
  */
 void quickSort(vector<Bid>& bids, int begin, int end) {
     //set mid equal to 0
-
+    int mid = 0;
     /* Base case: If there are 1 or zero bids to sort,
      partition is already sorted otherwise if begin is greater
      than or equal to end then return*/
-
+    if (begin >= end)
+    {
+        return;
+    }
     /* Partition bids into low and high such that
      midpoint is location of last element in low */
-     
+    mid = partition(bids, begin, end);
     // recursively sort low partition (begin to mid)
-
+    quickSort(bids, begin, mid);
     // recursively sort high partition (mid+1 to end)
-
+    quickSort(bids, mid + 1, end);
 }
 
 // FIXME (1a): Implement the selection sort logic over bid.title
