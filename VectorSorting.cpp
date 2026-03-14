@@ -203,6 +203,16 @@ double strToDouble(string str, char ch) {
     return atof(str.c_str());
 }
 
+/** 
+* Simple swap function
+*/
+
+void Swap(int num1, int num2) {
+    int temp = num1;
+    num1 = num2;
+    num2 = temp;
+}
+
 /**
  * The one and only main() method
  */
