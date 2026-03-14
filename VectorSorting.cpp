@@ -122,21 +122,42 @@ vector<Bid> loadBids(string csvPath) {
  */
 int partition(vector<Bid>& bids, int begin, int end) {
     //set low and high equal to begin and end
-
+    int low = begin;
+    int high = end;
     // Calculate the middle element as middlePoint (int)
+    int middlePoint = (low + high) / 2;
     // Set Pivot as middlePoint element title to compare (string)  
-  
+    string Pivot = bids.at(middlePoint).title;
     // while not done 
-
+    bool Done = false;
+    while (!Done)
+    {
         // keep incrementing low index while bids[low].title < Pivot
-       
+        while(bids[low].title < Pivot)
+        { 
+            low++;
+        }
         // keep decrementing high index while Pivot < bids[high].title
-
+        while (Pivot < bids[high].title)
+        {
+            high--;
+        }
         /* If there are zero or one elements remaining,
             all bids are partitioned. Return high */
-       // else swap the low and high bids (built in vector method)
-            // move low and high closer ++low, --high
-    //return high;
+        if (low >= high)
+        {
+            return high;
+        }
+            // else swap the low and high bids (built in vector method)
+                 // move low and high closer ++low, --high
+        else
+        {
+            swap(bids[low], bids[high]);
+            low++;
+            high--;
+        }
+        return high;
+    }
 }
 
 /**
@@ -201,16 +222,6 @@ void selectionSort(vector<Bid>& bids) {
 double strToDouble(string str, char ch) {
     str.erase(remove(str.begin(), str.end(), ch), str.end());
     return atof(str.c_str());
-}
-
-/** 
-* Simple swap function
-*/
-
-void Swap(int num1, int num2) {
-    int temp = num1;
-    num1 = num2;
-    num2 = temp;
 }
 
 /**
